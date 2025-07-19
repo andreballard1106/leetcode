@@ -1,20 +1,31 @@
-function isValid(s: string): boolean {
-    const stack: string[] = [];
-    const map: Record<string, string> = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
-    };
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
 
-    for (let char of s) {
-        if (char === '(' || char === '[' || char === '{') {
-            stack.push(char);
-        } else {
-            if (stack.length === 0 || stack.pop() !== map[char]) {
-                return false;
-            }
-        }
+function swapPairs(head: ListNode | null): ListNode | null {
+    const dummy = new ListNode(0, head);
+    let prev = dummy;
+
+    while (prev.next !== null && prev.next.next !== null) {
+        let first = prev.next;
+        let second = prev.next.next;
+
+        // Swapping
+        first!.next = second!.next;
+        second!.next = first;
+        prev.next = second;
+
+        // Move to the next pair
+        prev = first!;
     }
 
-    return stack.length === 0;
+    return dummy.next;
 }

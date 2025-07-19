@@ -1,20 +1,12 @@
-function isValid(s: string): boolean {
-    const stack: string[] = [];
-    const map: Record<string, string> = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
-    };
+function removeElement(nums: number[], val: number): number {
+    let k = 0; // Position for next non-val element
 
-    for (let char of s) {
-        if (char === '(' || char === '[' || char === '{') {
-            stack.push(char);
-        } else {
-            if (stack.length === 0 || stack.pop() !== map[char]) {
-                return false;
-            }
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== val) {
+            nums[k] = nums[i];
+            k++;
         }
     }
 
-    return stack.length === 0;
+    return k;
 }

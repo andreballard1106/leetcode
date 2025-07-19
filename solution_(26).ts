@@ -1,20 +1,14 @@
-function generateParenthesis(n: number): string[] {
-    const result: string[] = [];
-    function backtrack(current: string, open: number, close: number): void {
-        if (current.length === n * 2) {
-            result.push(current);
-            return;
-        }
+function removeDuplicates(nums: number[]): number {
+    if (nums.length === 0) return 0;
 
-        if (open < n) {
-            backtrack(current + "(", open + 1, close);
-        }
+    let k = 1; // Pointer for next unique element
 
-        if (close < open) {
-            backtrack(current + ")", open, close + 1);
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] !== nums[i - 1]) {
+            nums[k] = nums[i];
+            k++;
         }
     }
-    backtrack("", 0, 0);
-    return result;
-}
 
+    return k;
+}

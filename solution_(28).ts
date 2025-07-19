@@ -1,34 +1,14 @@
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
+function strStr(haystack: string, needle: string): number {
+    const hLen = haystack.length;
+    const nLen = needle.length;
 
-function mergeTwoLists(
-    list1: ListNode | null,
-    list2: ListNode | null
-): ListNode | null {
-    const dummy = new ListNode(0);
-    let current = dummy;
+    if (nLen === 0) return 0;
 
-    while (list1 !== null && list2 !== null) {
-        if (list1.val < list2.val) {
-            current.next = list1;
-            list1 = list1.next;
-        } else {
-            current.next = list2;
-            list2 = list2.next;
+    for (let i = 0; i <= hLen - nLen; i++) {
+        if (haystack.substring(i, i + nLen) === needle) {
+            return i;
         }
-        current = current.next;
     }
 
-    current.next = list1 !== null ? list1 : list2;
-
-    return dummy.next;
+    return -1;
 }
